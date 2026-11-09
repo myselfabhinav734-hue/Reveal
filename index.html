@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WVIC 2026 · Where is your team?</title>
+<style>
+  :root{--bg:#F6F9FC;--card:#FFFFFF;--line:#DCE5EE;--ink:#0E2440;--muted:#5A6B7E;--blue:#1D4ED8;--blue-d:#173DAE;--green:#16A34A;--shine:#2BE37F;--tint:#E8F8EF}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  .demo{background:var(--blue);color:#fff;text-align:center;font-size:12px;font-weight:700;padding:6px 10px;letter-spacing:.3px}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .mark{font-weight:800;letter-spacing:2px;font-size:15px}.mark b{color:var(--green)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:20px}
+  nav a:hover{color:var(--blue)}
+  .hero{padding:54px 0 30px}
+  .eyebrow{color:var(--blue);font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  h1{font-size:clamp(36px,7vw,68px);line-height:1.03;letter-spacing:-2px;margin:12px 0 16px;max-width:820px}
+  h1 span{background:linear-gradient(90deg,var(--blue),var(--green) 70%,var(--shine));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:18px;max-width:600px;margin:0 0 26px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{background:var(--blue);color:#fff;border:0;padding:13px 24px;border-radius:10px;font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 6px 16px rgba(29,78,216,.25)}
+  .btn:hover{background:var(--blue-d)}
+  .btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--line);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--blue)}
+  .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:14px}
+  .facts b{display:block;color:var(--ink);font-size:20px}
+  h2{font-size:28px;letter-spacing:-.6px;margin:54px 0 6px}
+  .sec-sub{color:var(--muted);margin:0 0 22px}
+  .track{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .ms{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative}
+  .ms .n{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:1px}
+  .ms h3{margin:6px 0 4px;font-size:16px;line-height:1.2}
+  .ms .d{font-size:12.5px;color:var(--muted)}
+  .ms.done{background:var(--tint);border-color:#BFEBD0}
+  .ms.done .n::after{content:" \2713 DONE";color:var(--green)}
+  .ms.now{border-color:var(--shine);border-width:2px;background:#fff;box-shadow:0 0 0 3px rgba(43,227,127,.25),0 0 30px rgba(43,227,127,.65);animation:glow 2.2s ease-in-out infinite}
+  .ms.now::before{content:"YOU ARE HERE";position:absolute;top:-12px;left:12px;background:linear-gradient(90deg,var(--green),var(--shine));color:#04301A;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:.8px}
+  @keyframes glow{50%{box-shadow:0 0 0 4px rgba(43,227,127,.35),0 0 46px rgba(43,227,127,.95)}}
+  .finder{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 8px 28px rgba(14,36,64,.06)}
+  .finder form{display:flex;gap:10px;flex-wrap:wrap}
+  .finder input{flex:1;min-width:220px;background:#fff;border:1px solid var(--line);color:var(--ink);padding:13px 14px;border-radius:10px;font-size:15px}
+  .finder input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.15)}
+  .result{margin-top:16px;min-height:24px}
+  .res-card{border:1px solid var(--shine);border-radius:12px;padding:14px 16px;background:var(--tint)}
+  .res-card b{font-size:18px}
+  .res-card .stage{color:var(--green);font-weight:800}
+  .none{color:var(--muted)}
+  .board{margin-top:22px;display:grid;gap:10px}
+  .row{display:grid;grid-template-columns:200px 1fr 150px;gap:14px;align-items:center;font-size:14px}
+  .row .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .barwrap{position:relative;padding-top:20px}
+  .pct{position:absolute;top:0;transform:translateX(-50%);font-size:12px;font-weight:800;color:var(--green);white-space:nowrap}
+  .pct.min{transform:translateX(0)}
+  .bar{height:8px;background:#E6EDF5;border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--green) 75%,var(--shine));border-radius:99px}
+  .row .st{color:var(--muted);text-align:right;font-size:13px}
+  .prize{margin:54px 0 10px;border-radius:18px;padding:30px;background:linear-gradient(135deg,#1D4ED8,#0F7B5A);color:#fff}
+  .prize h2{margin-top:0}
+  .prize .lead{color:#E3EEFF}
+  footer{color:var(--muted);font-size:12.5px;padding:34px 0 50px}
+  @media(max-width:860px){
+    .track{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr;gap:6px}.row .st{text-align:left}
+  }
+</style>
+</head>
+<body>
+<div class="demo">DEMO REBUILD for a workshop. Not the official WVIC website.</div>
+<div class="wrap">
+  <nav>
+    <div class="mark">WVIC <b>·</b> 2026</div>
+    <div><a href="#journey">Milestones</a><a href="#teams">Find your team</a></div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Wisconsin Venture Innovation Challenge</div>
+    <h1>Six weeks. Real mentors. <span>Real startups.</span></h1>
+    <p class="lead">A student-led venture competition at UW–Madison. Teams move through structured milestones to Demo Day, where the winner earns a trip to San Francisco.</p>
+    <div class="btns">
+      <a class="btn" href="#teams">Where is my team?</a>
+      <a class="btn ghost" href="#journey">See the milestones</a>
+    </div>
+    <div class="facts">
+      <div><b>Oct 12</b>Kickoff</div>
+      <div><b>Dec 4</b>Demo Day</div>
+      <div><b>San Francisco</b>Winning team trip</div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <h2>The journey</h2>
+    <p class="sec-sub">Six stages from kickoff to Demo Day. The glowing one is where the competition is right now.</p>
+    <div class="track" id="track"></div>
+  </section>
+
+  <section id="teams">
+    <h2>Where is your team?</h2>
+    <p class="sec-sub">Type a team name to see its current stage. (Demo teams only. Try "Cubby" or "Badger".)</p>
+    <div class="finder">
+      <form id="form" autocomplete="off">
+        <input id="q" list="names" placeholder="Team name">
+        <datalist id="names"></datalist>
+        <button class="btn" type="submit">Check</button>
+      </form>
+      <div class="result" id="result"></div>
+      <div class="board" id="board"></div>
+    </div>
+  </section>
+
+  <section class="prize">
+    <h2>Demo Day: December 4</h2>
+    <p class="lead" style="margin:0">Judges won't remember your slides. They'll remember the moment they clicked a link and your product worked.</p>
+  </section>
+
+  <footer>Workshop demo built with Claude, Figma and Vercel. Team names are made up. Milestone names other than Prototype &amp; Analytics, and all dates other than the kickoff, Prototype &amp; Analytics window and Demo Day, are placeholders.</footer>
+</div>
+
+<script>
+// Placeholder milestones. Replace names and dates with WVIC's real schedule.
+const Y=2026;
+const D=(m,d)=>new Date(Y,m-1,d);
+const MILESTONES=[
+  {name:'Kickoff',            start:D(10,12), end:D(10,12), label:'Oct 12'},
+  {name:'Customer discovery', start:D(10,13), end:D(10,26), label:'Oct 13 – 26'},
+  {name:'Business model',     start:D(10,27), end:D(11,1),  label:'Oct 27 – Nov 1'},
+  {name:'Prototype & Analytics', start:D(11,2), end:D(11,16), label:'Nov 2 – 16'},
+  {name:'Pitch polish',       start:D(11,17), end:D(12,3),  label:'Nov 17 – Dec 3'},
+  {name:'Demo Day',           start:D(12,4),  end:D(12,4),  label:'Dec 4'}
+];
+// Demo teams (made up). stage = index into MILESTONES.
+const TEAMS=[
+  {name:'Cubby (demo)',        stage:3, note:'Baby gear rental for short stays'},
+  {name:'Badger Bytes (demo)', stage:3, note:'Campus study tools'},
+  {name:'Lakeshore Labs (demo)', stage:2, note:'Sustainable packaging'},
+  {name:'Terrace Tech (demo)', stage:4, note:'Event discovery app'},
+  {name:'StudyLoop (demo)',    stage:1, note:'Peer tutoring marketplace'},
+  {name:'Mendota Meals (demo)',stage:3, note:'Meal-prep for busy students'}
+];
+
+// Which milestone is current? By date, falling back to Prototype & Analytics.
+function currentIndex(){
+  const now=new Date();
+  const q=new URLSearchParams(location.search).get('stage'); // ?stage=3 to rehearse
+  if(q!==null&&MILESTONES[+q])return +q;
+  for(let i=0;i<MILESTONES.length;i++){
+    const end=new Date(MILESTONES[i].end);end.setHours(23,59,59);
+    if(now>=MILESTONES[i].start&&now<=end)return i;
+  }
+  return 3;
+}
+const NOW=currentIndex();
+
+const $=id=>document.getElementById(id);
+$('track').innerHTML=MILESTONES.map((m,i)=>`
+  <div class="ms ${i<NOW?'done':i===NOW?'now':''}">
+    <div class="n">STAGE ${i+1}</div>
+    <h3>${m.name}</h3>
+    <div class="d">${m.label}</div>
+  </div>`).join('');
+
+$('names').innerHTML=TEAMS.map(t=>`<option value="${t.name}">`).join('');
+const pct=t=>Math.round((t.stage+1)/MILESTONES.length*100);
+$('board').innerHTML=TEAMS.map(t=>`
+  <div class="row">
+    <div class="nm">${t.name}</div>
+    <div class="barwrap">
+      <div class="pct" style="left:${Math.max(pct(t),8)}%">${pct(t)}%</div>
+      <div class="bar"><i style="width:${pct(t)}%"></i></div>
+    </div>
+    <div class="st">${MILESTONES[t.stage].name}</div>
+  </div>`).join('');
+
+function track(name,data){console.log('[wvic-demo]',name,data||{});}
+track('page_view');
+
+$('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const q=$('q').value.trim().toLowerCase();
+  const out=$('result');
+  if(!q){out.innerHTML='';return;}
+  const hit=TEAMS.find(t=>t.name.toLowerCase().includes(q));
+  track('team_lookup',{found:!!hit});
+  if(!hit){out.innerHTML='<div class="none">No team found with that name. In the full version, teams would register here.</div>';return;}
+  const m=MILESTONES[hit.stage];
+  const behind=NOW-hit.stage;
+  const msg=behind>0?`${behind} stage${behind>1?'s':''} behind the pack`:behind<0?'Ahead of the pack':'Right on track';
+  out.innerHTML=`<div class="res-card"><b>${hit.name}</b><br>${hit.note}<br><span class="stage">Stage ${hit.stage+1}: ${m.name}</span> · ${m.label}<br><b style="color:var(--green)">${pct(hit)}%</b> of the way to Demo Day · <span class="none">${msg}</span></div>`;
+});
+</script>
+</body>
+</html>
