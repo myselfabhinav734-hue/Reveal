@@ -60,6 +60,13 @@
   .prize{margin:54px 0 10px;border-radius:18px;padding:30px;background:linear-gradient(135deg,#1D4ED8,#0F7B5A);color:#fff}
   .prize h2{margin-top:0}
   .prize .lead{color:#E3EEFF}
+  .rescards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .rescard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;color:var(--ink);transition:.15s}
+  .rescard:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(14,36,64,.08);transform:translateY(-2px)}
+  .rescard .tag{color:var(--green);font-weight:800;font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
+  .rescard h3{margin:6px 0 4px;font-size:18px}
+  .rescard p{margin:0;color:var(--muted);font-size:14px}
+  .rescard .go{display:inline-block;margin-top:12px;color:var(--blue);font-weight:700;font-size:14px}
   footer{color:var(--muted);font-size:12.5px;padding:34px 0 50px}
   @media(max-width:860px){
     .track{grid-template-columns:1fr}
@@ -72,7 +79,7 @@
 <div class="wrap">
   <nav>
     <div class="mark">WVIC <b>·</b> 2026</div>
-    <div><a href="#journey">Milestones</a><a href="#teams">Find your team</a></div>
+    <div><a href="#journey">Milestones</a><a href="#teams">Find your team</a><a href="#resources">Resources</a></div>
   </nav>
 
   <section class="hero">
@@ -107,6 +114,25 @@
       </form>
       <div class="result" id="result"></div>
       <div class="board" id="board"></div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>Resources</h2>
+    <p class="sec-sub">The two tools we used to put a product online in minutes. Both have free plans.</p>
+    <div class="rescards">
+      <a class="rescard" href="https://github.com/signup" target="_blank" rel="noopener">
+        <div class="tag">Step 1 · Store your code</div><h3>GitHub</h3>
+        <p>Create a free account and upload your index.html in a repository.</p><span class="go">Open GitHub &rarr;</span>
+      </a>
+      <a class="rescard" href="https://vercel.com/signup" target="_blank" rel="noopener">
+        <div class="tag">Step 2 · Go live</div><h3>Vercel</h3>
+        <p>Sign in with GitHub, import your repository and deploy to get a public link.</p><span class="go">Open Vercel &rarr;</span>
+      </a>
+      <a class="rescard" href="https://github.com/myselfabhinav734-hue/Reveal" target="_blank" rel="noopener">
+        <div class="tag">See it in action</div><h3>This site's code</h3>
+        <p>The repository behind this demo page, one HTML file.</p><span class="go">Open repository &rarr;</span>
+      </a>
     </div>
   </section>
 
